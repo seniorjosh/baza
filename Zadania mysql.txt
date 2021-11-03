@@ -1,0 +1,49 @@
+zad 1
+create table postac (id_postaci int auto_increment primary key, rodzaj enum('Bjorn','wiking','Drozd'), data_ur date, wiek int unsigned;
+
+zad 2
+create table walizka(id_walizki int auto_increment primary key, projemnosc int, kolor enum('niebieski','czerwony','zielony'), id_wlasiciela int, foregin key(id_wlasciciela) references postac(id_postaci) on delete cascade);
+
+zad 3
+create table izba( nazwa_izby varchar(40), metraz int unsigned, wlasciciel int, foregin key(wlasciciel) references postac(id_postaci) on delete cascade, primary key(nazwa_izby, adres_budnyku));
+
+zad 4 
+create table przetwory(id_przetworu int primary key, rok produkcji date, id_wykonawcy int, foregin key(id_wykonawcy) references postac(id_postaci), zawartosc varchar(40), dodatek varchar(40), id_konsumenta int, foregin key(id_konsumenta), references postac(id_postaci);
+create table przetwory alter dodatek set default "chilli";
+create table przetwory alter rok_produkcji set default "1652-06-03";
+insert into przetwory(id_przetworu, rok_produkcji, id_wykonawcy, zawartosc, dodatek, id_konsumenta values ("1","1988-03-01,"3", "parmezan", "chilli","i");
+
+zad 5
+1) 
+insert into postac(id_postaci, nazwa, rodzaj, data_ur, wiek) values (4,"Rangar","wiking","1980-11-11","31");
+insert into postac(id_postaci, nazwa, rodzaj, data_ur, wiek) values (4,"Epos","wiking","1877-12-03");
+insert into postac(id_postaci, nazwa, rodzaj, data_ur, wiek) values (4,"Verno","wiking","1989-11-23","31");
+insert into postac(id_postaci, nazwa, rodzaj, data_ur, wiek) values (4,"Flint","wiking","1988-01-27","31");
+insert into postac(id_postaci, nazwa, rodzaj, data_ur, wiek) values (4,"Ares","wiking","1981-04-30","31");
+
+2) 
+create table statek(nazwa_statku int primary key auto_increment, rodzaj_statku enum("Gringo"), data_wodowania date, max_ladownosc int unsigned);
+
+3)
+insert into statek(nazwa_statku, rodzaj_statku, data_wodowania, max_ladownosc) values (2, "Gringo", "2020-11-02", "800");
+insert into statek(nazwa_statku, rodzaj_statku, data_wodowania, max_ladownosc) values (1, "Tratwa", "2020-11-02", "400");
+
+4) 
+alter table postac add column funkcja varchar(50) after wiek;
+
+5) 
+update postac set funkcja="kapitan" where nazwa="Bjorn";
+
+6) 
+alter table postac add column statek int;
+alter table postac add foregin key(statek) references statek(nazwa_statku);
+
+7)
+update postac set statek="1" where rodzaj="wiking";
+update postac set statek="2" where nazwa="Drozd";
+
+8)
+drop table izba;
+
+zad 6
+aleter table postac add primary key 
